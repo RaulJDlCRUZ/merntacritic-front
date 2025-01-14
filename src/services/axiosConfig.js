@@ -7,7 +7,7 @@ if (!BACKEND_URI) {
   console.error("Error: VITE_BACKEND_URI no está definido en el entorno.");
 }
 
-// Configura tu instancia base de Axios
+// Mi instancia base de Axios
 const axiosInstance = axios.create({
   baseURL: BACKEND_URI, // Utiliza la variable de entorno de Vite
   timeout: 10000, // Tiempo máximo para las solicitudes

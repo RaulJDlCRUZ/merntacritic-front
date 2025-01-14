@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import axios from "../axiosConfig.js"; // Usamos tu configuración existente
+import { Link } from 'react-router-dom';
+import axios from "../services/axiosConfig.js"; // Usamos tu configuración existente
+import GamesList from "../components/GamesList.jsx";
 
-const GameList = () => {
+const GamesPage = () => {
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -28,17 +30,18 @@ const GameList = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div>
-      <h1>Listado de Videojuegos</h1>
-      <ul>
-        {games.map((game) => (
-          <li key={game._id}>
-            <strong>{game.title}</strong> - Metascore: {game.metascore}
-          </li>
-        ))}
-      </ul>
+    <div className="min-h-screen bg-gray-100">
+      <main className="container mx-auto px-4 py-8">
+        <header className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Welcome to GameCritic</h1>
+          <p className="text-xl text-gray-600">Listado de todos los juegos</p>
+        </header>
+
+        <GamesList title="New Releases" games={games} />
+        {/* <GamesList title="Best Rated Games" games={bestRated} /> */}
+      </main>
     </div>
   );
 };
 
-export default GameList;
+export default GamesPage;
