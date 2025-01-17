@@ -19,8 +19,8 @@ export default function GameCard({ slug, title, coverUrl, release_date, metascor
             />
           )}
         </div>
-        <div className="p-4">
-          <h3 className="font-bold text-lg mb-2 text-gray-900">{title}</h3>
+        <div className="p-4 flex flex-col justify-between h-32">
+          <h3 className="font-bold text-lg mb-2 text-gray-900 line-clamp-2">{title}</h3>
           <div className="flex justify-between items-center">
             <span className="text-sm text-gray-600">{formattedDate}</span>
             <Punctuation metascore={metascore} />

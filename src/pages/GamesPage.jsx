@@ -3,45 +3,57 @@ import { Link } from 'react-router-dom';
 import axios from "../services/axiosConfig.js"; // Usamos tu configuración existente
 import GamesList from "../components/GamesList.jsx";
 
-const GamesPage = () => {
-  const [games, setGames] = useState([]);
+export default function GamesPage() {
+  const [newReleases, setNewReleases] = useState(() => JSON.parse(localStorage.getItem('newReleases')) || []);
+  const [bestRated, setBestRated] = useState(() => JSON.parse(localStorage.getItem('bestRated')) || []);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const fetchGames = async (endpoint, setter, key) => {
+    try {
+      const params = new URLSearchParams([['limit', 12], ['page', 1]]);
+      const response = await axios.get(endpoint, { params });
+      setter(response.data);
+      // Guardamos en localStorage para almacenar el estado actual
+      localStorage.setItem(key, JSON.stringify(response.data));
+    } catch (err) {
+      console.error(`Error al cargar los videojuegos desde ${endpoint}:`, err); // Debug
+      setError("Error al cargar los videojuegos.");
+    }
+  };
+
   useEffect(() => {
     console.log("Iniciando la obtención de videojuegos..."); // Debug
-    const fetchGames = async () => {
-      try {
-        const response = await axios.get("/games");
-        console.log("Videojuegos obtenidos:", response.data); // Debug
-        setGames(response.data);
-      } catch (err) {
-        console.error("Error al cargar los videojuegos:", err); // Debug
-        setError("Error al cargar los videojuegos.");
-      } finally {
-        setLoading(false);
-      }
+    const fetchAllGames = async () => {
+      await Promise.all([
+        fetchGames("/games/latest", setNewReleases, 'newReleases'),
+        fetchGames("/games/best", setBestRated, 'bestRated')
+      ]);
+      setLoading(false);
     };
 
-    fetchGames();
+    if (!localStorage.getItem('newReleases') || !localStorage.getItem('bestRated')) {
+      fetchAllGames();
+    } else {
+      setLoading(false);
+    }
   }, []);
 
-  if (loading) return <p>Cargando videojuegos...</p>;
+  if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
+  /* TAILWINDCSS RETURN */
   return (
     <div className="min-h-screen bg-gray-100">
       <main className="container mx-auto px-4 py-8">
         <header className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Welcome to GameCritic</h1>
-          <p className="text-xl text-gray-600">Listado de todos los juegos</p>
+          <h1 className="text-6xl font-bold text-gray-900 mb-4">Welcome to MERNtacritic!</h1>
+          <p className="text-xl text-gray-600">Check our game listing!</p>
         </header>
 
-        <GamesList title="New Releases" games={games} />
-        {/* <GamesList title="Best Rated Games" games={bestRated} /> */}
+        <GamesList title="New Releases" games={newReleases} />
+        <GamesList title="Best Rated Games" games={bestRated} />
       </main>
     </div>
   );
 };
-
-export default GamesPage;
