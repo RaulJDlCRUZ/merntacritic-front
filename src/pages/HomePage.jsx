@@ -1,6 +1,6 @@
 import React from 'react';
 
-const HomePage = () => {
+export default function HomePage () {
   return (
     <div className="container mx-auto px-4 py-8">
       <header className="text-center mb-12">
@@ -8,10 +8,8 @@ const HomePage = () => {
         <p className="text-xl text-gray-600">Discover and track the best games across all platforms</p>
       </header>
       <section>
-        <p>Home content goes here... <br/> \/\/TODO: METER JUEGOS MÁS RECIENTES Y COMENTARIOS MÁS RECIENTES</p>
+        <p>Home content goes here... <br/> //TODO: METER JUEGOS MÁS RECIENTES Y COMENTARIOS MÁS RECIENTES</p>
       </section>
     </div>
   );
-};
-
-export default HomePage;
+}

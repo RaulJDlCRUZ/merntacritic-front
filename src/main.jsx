@@ -10,6 +10,7 @@ import AboutPage from './pages/AboutPage.jsx';
 import GamesPage from './pages/GamesPage.jsx';
 import GamePage from './pages/GamePage.jsx';
 import BrowseGamesPage from './pages/BrowseGamesPage.jsx';
+import GameReviewsPage from './pages/GameReviewsPage.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -23,6 +24,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/games/search" element={<BrowseGamesPage />} /> {/* Página de juegos BÚSQUEDA */}
           <Route path="/games/:slug" element={<GamePage />} /> {/* Página de juegos DETALLE (:slug) */}
           <Route path="/games/id/:id" element={<GamePage />} /> {/* Página de juegos DETALLE (:id) */}
+          <Route path="/reviews/:slug" element={<GameReviewsPage />} />
           <Route path="*" element={NotFound} /> {/* Página no encontrada */}
         </Routes>
       </App>
