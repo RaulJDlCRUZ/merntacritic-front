@@ -4,9 +4,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.css';
 import App from './App.jsx';
 
+import NotFound from './pages/NotFound.jsx';
 import HomePage from './pages/HomePage.jsx';
 import AboutPage from './pages/AboutPage.jsx';
 import GamesPage from './pages/GamesPage.jsx';
+import GamePage from './pages/GamePage.jsx';
 import BrowseGamesPage from './pages/BrowseGamesPage.jsx';
 
 createRoot(document.getElementById('root')).render(
@@ -19,7 +21,9 @@ createRoot(document.getElementById('root')).render(
           <Route path="/about" element={<AboutPage />} /> {/* Página "Sobre nosotros" */}
           <Route path="/games" element={<GamesPage />} /> {/* Página de juegos INICIAL */}
           <Route path="/games/search" element={<BrowseGamesPage />} /> {/* Página de juegos BÚSQUEDA */}
-          <Route path="*" element={<h1>404: Not Found</h1>} /> {/* Página no encontrada */}
+          <Route path="/games/:slug" element={<GamePage />} /> {/* Página de juegos DETALLE (:slug) */}
+          <Route path="/games/id/:id" element={<GamePage />} /> {/* Página de juegos DETALLE (:id) */}
+          <Route path="*" element={NotFound} /> {/* Página no encontrada */}
         </Routes>
       </App>
     </BrowserRouter>

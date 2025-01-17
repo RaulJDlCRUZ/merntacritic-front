@@ -8,7 +8,7 @@ const HomePage = () => {
         <p className="text-xl text-gray-600">Discover and track the best games across all platforms</p>
       </header>
       <section>
-        <p>Home content goes here...</p>
+        <p>Home content goes here... <br/> \/\/TODO: METER JUEGOS MÁS RECIENTES Y COMENTARIOS MÁS RECIENTES</p>
       </section>
     </div>
   );

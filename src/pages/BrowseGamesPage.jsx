@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from 'react-router-dom';
-import axios from "../services/axiosConfig.js"; // Usamos tu configuración existente
+import axios from "../services/axiosConfig.js"; // Usamos la configuración existente
 import GamesList from "../components/GamesList.jsx";
 
 export default function BrowseGamesPage() {
@@ -14,13 +14,13 @@ export default function BrowseGamesPage() {
   };
 
   const query = useQuery();
-  const searchParams = {};
-
-  query.forEach((value, key) => {
-    searchParams[key] = value;
-  });
 
   useEffect(() => {
+    const searchParams = {};
+    query.forEach((value, key) => {
+      searchParams[key] = value;
+    });
+
     const fetchGames = async (searchParams) => {
       try {
         const response = await axios.get('/games/search', {
@@ -35,8 +35,9 @@ export default function BrowseGamesPage() {
     };
 
     fetchGames(searchParams);
-  }, [query, searchParams]);
+  }, []);
 
+  
   /* TAILWINDCSS RETURN */
   return (
     <div className="min-h-screen bg-gray-100">
