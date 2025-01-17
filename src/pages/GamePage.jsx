@@ -142,7 +142,6 @@ export default function GamePage() {
                     <div className="md:flex">
                         {/* Game Cover */}
                         <div className="md:w-1/3 bg-gray-200 h-[400px]"></div>
-
                         {/* Game Info */}
                         <div className="p-6 md:w-2/3">
                             <h1 className="text-4xl font-bold text-gray-900 mb-4">{game.title}</h1>
@@ -151,11 +150,19 @@ export default function GamePage() {
                                 <ScoreBox score={game.user_score} label="User Score" />
                             </div>
                             <div className="space-y-4">
-                                <div className="flex items-center gap-2">
-                                    <span className="text-gray-600">Release Date:</span>
-                                    <span className="font-medium">
-                                        {new Date(game.release_date).getTime() === 0 ? 'Unknown' : formatDate(game.release_date)}
+                                <div className="flex flex-col gap-2">
+                                    <span className="text-gray-600">
+                                        According to the review, it is <b>{getDescription(game.metascore * 10)}</b>.
                                     </span>
+                                    <span className="text-gray-600">
+                                        According to users, it is <b>{getDescription(game.user_score * 10)}</b>.
+                                    </span>
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-gray-600">Release Date:</span>
+                                        <span className="font-medium">
+                                            {new Date(game.release_date).getTime() === 0 ? 'Unknown' : formatDate(game.release_date)}
+                                        </span>
+                                    </div>
                                 </div>
                                 {game.price && (
                                     <div className="flex items-center gap-2">
@@ -170,10 +177,10 @@ export default function GamePage() {
                                 )}
                             </div>
                         </div>
-                    </div>
-                </div>
+                        </div>
+                        </div>
 
-                {/* Tabs Navigation */}
+                        {/* Tabs Navigation */}
                 <div className="bg-white rounded-lg shadow-md mb-8">
                     <div className="border-b border-gray-200">
                         <div className="flex gap-4 px-4">

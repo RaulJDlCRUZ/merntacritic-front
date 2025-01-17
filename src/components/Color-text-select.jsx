@@ -7,7 +7,7 @@ export function getColor (score) {
 }
 
 export function getDescription (score) {
-    if (score === 'tbd') return '';
+    if (score === 'tbd' || !score) return 'Unknown';
     if (score >= 90) return 'Universal Acclaim';
     if (score >= 75) return 'Generally Favorable';
     if (score >= 50) return 'Mixed or Average';
